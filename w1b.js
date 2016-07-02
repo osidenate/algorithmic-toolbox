@@ -51,12 +51,30 @@ const maxPairwiseProductFast = (numbers) => {
     return max;
 };
 
+const maxPairwiseProductFaster = (numbers) => {
+    const length = numbers.length;
+    let max1index = 0, max2index = 0;
+
+    for (let i = 0; i < length; i++) {
+        if (numbers[i] > numbers[max1index]) {
+            max1index = i;
+        }
+    }
+
+    for (let g = 0; g < length; g++) {
+        if (numbers[g] > max2index && g !== max1index) {
+            max2index = g;
+        }
+    }
+
+    return numbers[max1index] * numbers[max2index];
+};
 
 rl.question('Input: ', (line) => {
     const words = line.split(' ');
     const numbers = words.map(word => parseInt(word, 10));
 
-    console.log(maxPairwiseProductFast(numbers));
+    console.log(maxPairwiseProductFaster(numbers));
 
     rl.close();
 });
